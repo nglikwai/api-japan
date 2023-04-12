@@ -1,4 +1,5 @@
 import Family from "../models/family"
+import NextCors from 'nextjs-cors';
 
 export const getFamilies = async (req, res) => {
     const familys = await Family.find({})
@@ -6,13 +7,11 @@ export const getFamilies = async (req, res) => {
 }
 
 export const find = async (req, res) => {
-    console.log(req.query.id)
     const family = await Family.findOne({ id: req.query.id })
     res.json({ data: family })
 }
 
 export const update = async (req, res) => {
-    console.log(req.query.id)
     const { id } = req.query
     const family = await Family.findOneAndUpdate({ id }, req.body)
     await family.save()

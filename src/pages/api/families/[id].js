@@ -1,17 +1,26 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-import nc from 'next-connect'
 import { find, update } from '../../../../controllers/familyControllers';
 import dbConnect from '../../../../config/dbConnect';
-const handler = nc();
+import NextCors from 'nextjs-cors';
 
 dbConnect();
 
-handler
-    .get(find)
+export default async function handler(req, res) {
+    await NextCors(req, res, {
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        origin: '*',
+        optionsSuccessStatus: 200,
+    });
+    let data;
 
-handler
-    .patch(update)
+    switch (req.method) {
+        case 'GET':
+            data = await find(req, res)
+            break
+        case 'PATCH':
+            data = await update(req, res)
+            break
+    }
 
+}
 
-export default handler;
