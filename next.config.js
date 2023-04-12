@@ -11,7 +11,7 @@ module.exports = {
           },
           {
             key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, PUT, DELETE, OPTIONS', // Allow any HTTP method
+            value: 'GET, POST, PUT, PATCH, DELETE, OPTIONS', // Allow any HTTP method
           },
         ],
       },
